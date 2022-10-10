@@ -7,12 +7,14 @@ class Circle:
         self.radius = radius
 
     def __sub__(self, other):
+        if self.radius == other.radius:
+            return Point()
+
         return abs(self.radius - other.radius)
 
 
-class Point(Circle):
-    def __init__(self, radius: int, x: int, y: int):
-        super().__init__(radius)
+class Point:
+    def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
 
