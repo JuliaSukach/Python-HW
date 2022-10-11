@@ -12,9 +12,10 @@ from base import Shape
 class Circle(Shape):
     def __init__(self, radius: int):
         self.radius = radius
+        self._area = math.pi * radius ** 2
 
     def get_area(self):
-        return math.pi * self.radius ** 2
+        return self._area
 
     def __sub__(self, other):
         return self.get_area() - other.get_area()

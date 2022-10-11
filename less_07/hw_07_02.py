@@ -12,9 +12,10 @@ class Rectangle(Shape):
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height
+        self._area = width * height
 
     def get_area(self):
-        return self.width * self.height
+        return self._area
 
     def get_perimeter(self):
         return self.width * 2 + self.height * 2
