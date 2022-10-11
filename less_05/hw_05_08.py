@@ -19,7 +19,7 @@ sum_with_filter_and_lambda(num_list)
 
 def sum_with_filter_and_func(nums):
     def filter_func(num):
-        return True if (num % 3 == 0 or num % 5 == 0) else False
+        return num % 3 == 0 or num % 5 == 0
 
     return sum(tuple(filter(filter_func, nums)))
 

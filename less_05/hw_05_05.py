@@ -9,25 +9,34 @@
 def analyzer(string):
     stack = []
 
-    positive = True
-    integer = True
     for i, value in enumerate(string):
         if value == '-' and i == 0:
-            positive = False
             stack.append(value)
         elif value == '.':
-            integer = False
             stack.append(value)
         elif value.isdigit():
             stack.append(value)
         else:
-            return print(f'You entered wrong number {string}')
+            return
 
-    return print(f'You entered ' 
-                 f'{"positive" if positive else "negative"} '
-                 f'{"integer" if integer else "fractional"} number '
-                 f'{"".join(stack)}')
+    return "".join(stack)
 
 
-analyzer('1997')
+def check_num_type(data):
+    if not data:
+        return f'You have entered wrong number'
 
+    positive = True
+    integer = True
+    if data[0] == '-':
+        positive = False
+    if '.' in data:
+        integer = False
+
+    return (f'You entered '
+            f'{"positive" if positive else "negative"} '
+            f'{"integer" if integer else "fractional"} number '
+            f'{data}')
+
+
+check_num_type(analyzer('-14.7'))

@@ -1,6 +1,7 @@
 from hw_05_02 import convert_num_to_str, convert_num_to_str_func
 from hw_05_03 import filter_with_lambda, filter_with_func
 from hw_05_04 import fibonacci_num, func_binet
+from hw_05_05 import analyzer, check_num_type
 from hw_05_06 import fibonacci
 from hw_05_07 import fib
 from hw_05_08 import sum_with_filter_and_lambda, sum_with_filter_and_func, sum_with_reduce, sum_with_reduce_and_filter
@@ -28,6 +29,14 @@ def test_fibonacci_num():
 
 def test_func_binet():
     assert func_binet(4) == 3
+
+
+def test_check_num_type():
+    assert check_num_type('-199.4') == 'You entered negative fractional number -199.4'
+
+
+def test_analyzer():
+    assert analyzer('w3985ksj') is None
 
 
 def test_fibonacci():
