@@ -23,20 +23,18 @@ def create_table(conn: sqlite3.Connection, table_name: str):
     return curs.fetchall()
 
 
-def insert_data_to_table(conn: sqlite3.Connection, table_name: str,):
-    cursor = conn.cursor()
+def insert_data_to_table(conn: sqlite3.Connection, table_name: str):
+    curs = conn.cursor()
 
-    q = f"""
-    INSERT INTO {table_name} (subject, aud_num)
-    VALUES 
-    ('math', 101),
-    ('physics', 200),
-    ('chemistry', 300);
-    """
-
-    cursor.execute(q)
+    curs.execute(
+        f"""INSERT INTO {table_name} (subject, aud_num)
+        VALUES 
+        ('math', 101),
+        ('physics', 200),
+        ('chemistry', 300);
+        """)
     conn.commit()
-    return cursor.fetchall()
+    return curs.fetchall()
 
 
 def main():
@@ -46,6 +44,8 @@ def main():
         create_table(conn, table_name)
 
         insert_data_to_table(conn, table_name)
+
+        assert len(get_data_from_table(conn, table_name)) > 0
 
     except:
         conn.rollback()

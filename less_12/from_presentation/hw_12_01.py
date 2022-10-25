@@ -24,19 +24,16 @@ def create_table(conn: sqlite3.Connection, table_name: str):
 
 
 def insert_data_to_table(conn: sqlite3.Connection, table_name: str):
-    cursor = conn.cursor()
-
-    q = f"""
-    INSERT INTO {table_name} (name, age)
-    VALUES 
-    ('Yulia', 18),
-    ('Alex', 19),
-    ('Nika', 17);
-    """
-
-    cursor.execute(q)
+    curs = conn.cursor()
+    curs.execute(
+        f"""INSERT INTO {table_name} (name, age)
+        VALUES 
+        ('Yulia', 18),
+        ('Alex', 19),
+        ('Nika', 17);
+        """)
     conn.commit()
-    return cursor.fetchall()
+    return curs.fetchall()
 
 
 def main():
@@ -46,6 +43,8 @@ def main():
         create_table(conn, table_name)
 
         insert_data_to_table(conn, table_name)
+
+        assert len(get_data_from_table(conn, table_name)) > 0
 
     except:
         conn.rollback()
