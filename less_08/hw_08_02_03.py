@@ -10,18 +10,33 @@ from hw_08_01 import Employee
 
 
 class TechnicalStaff(Employee):
-    @classmethod
-    def change_department(cls, new_department):
-        cls.department = new_department
+    department = 'Practical medicine'
 
     @staticmethod
     def get_info(employee):
-        print()
+        if TechnicalStaff.department == employee.department:
+            return 'hi'
+        return 'You are from different department'
+
+
+first_employee = Employee('Yulia', 'Sukach', 24, 'someone')
+assert first_employee.info['fullname'] == 'Yulia Sukach'
+assert first_employee.info['age'] == 24
+
+
+first_employee.change_department('Preventive medicine')
 
 
 second_employee = TechnicalStaff('Alesia', 'Ivanova', 25, 'dentist')
-assert second_employee.info['fullname'] == 'Yulia Sukach'
-assert second_employee.info['age'] == 24
-assert second_employee.info['department'] is None
-second_employee.change_department('surgeon')
-assert TechnicalStaff.department == 'surgeon'
+assert second_employee.info['fullname'] == 'Alesia Ivanova'
+assert second_employee.info['age'] == 25
+
+assert TechnicalStaff.get_info(first_employee) == 'You are from different department'
+
+second_employee.change_department('Preventive medicine')
+
+assert TechnicalStaff.get_info(first_employee) == 'hi'
+
+
+
+

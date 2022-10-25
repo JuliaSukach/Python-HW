@@ -12,14 +12,13 @@ from datetime import datetime
 
 
 class Person:
-    onboarding_time = datetime.now()
 
     @property
     def info(self):
         return {
             'fullname': f'{self.first_name} {self.last_name}',
             'age': self.age,
-            "working_time": (datetime.now() - Person.onboarding_time).total_seconds() * 1000,
+            "working_time": (datetime.now() - self.onboarding_time).total_seconds() * 1000,
             "department": Employee.department
         }
 
@@ -32,9 +31,8 @@ class Employee(Person):
         self.last_name = last_name
         self.age = age
         self.profession = profession
+        self.onboarding_time = datetime.now()
 
-
-first_employee = Employee('Yulia', 'Sukach', 24, 'someone')
-assert first_employee.info['fullname'] == 'Yulia Sukach'
-assert first_employee.info['age'] == 24
-assert first_employee.info['department'] is None
+    @classmethod
+    def change_department(cls, new_department):
+        cls.department = new_department
