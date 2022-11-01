@@ -12,10 +12,11 @@ def get_data_from_table(conn: sqlite3.Connection, table_name: str):
 def create_table(conn: sqlite3.Connection, table_name: str):
     curs = conn.cursor()
     curs.execute(
-        f"""CREATE TABLE IF NOT EXISTS {table_name}(
+        f"""CREATE TABLE {table_name}(
         student_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
-        age INTEGER
+        age INTEGER,
+        specialty TEXT
         );
         """
     )
@@ -26,11 +27,11 @@ def create_table(conn: sqlite3.Connection, table_name: str):
 def insert_data_to_table(conn: sqlite3.Connection, table_name: str):
     curs = conn.cursor()
     curs.execute(
-        f"""INSERT INTO {table_name} (name, age)
+        f"""INSERT INTO {table_name} (name, age, specialty)
         VALUES 
-        ('Yulia', 18),
-        ('Alex', 19),
-        ('Nika', 17);
+        ('Yulia', 18, 'math'),
+        ('Alex', 19, 'chemistry'),
+        ('Nika', 17, 'math');
         """)
     conn.commit()
     return curs.fetchall()
