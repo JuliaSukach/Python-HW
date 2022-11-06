@@ -8,7 +8,7 @@ def fib_decorator(func):
     cash = {}
 
     def inner(n):
-        if cash.get(n):
+        if n in cash:
             return cash[n]
 
         result = func(n)
