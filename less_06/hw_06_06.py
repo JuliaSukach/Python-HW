@@ -9,40 +9,41 @@
 
 import json
 
+with open('web-app.json', 'r') as file:
+    json_data = json.load(file)
 
-def get_vals_by_tag(keys):
-    result = []
-    with open('web-app.json', 'r') as file:
-        data = json.load(file)
-        cache = {}
-
-        def if_type_is_changed(obj):
-            return type(obj) in [dict, list]
-
-        def if_value_in_keys(v):
-            return v in keys
-
-        def search(obj):
-            for v in obj:
-                if if_value_in_keys(v):
-                    if cache.get(v) is None:
-                        result.append([v, [obj.get(v)]])
-                        cache.update({v: len(result) - 1})
-                    else:
-                        result[cache.get(v)][1].append(obj.get(v))
-                else:
-                    if if_type_is_changed(v):
-                        search(v)
-                    elif if_type_is_changed(obj[v]):
-                        search(obj[v])
-
-        search(data)
-        return result
+result = []
+cache = {}
 
 
-assert get_vals_by_tag(['servlet-mapping', "AA"]) == [['servlet-mapping', [{
-      "cofaxCDS": "/",
-      "cofaxEmail": "/cofaxutil/aemail/*",
-      "cofaxAdmin": "/admin/*",
-      "fileServlet": "/static/*",
-      "cofaxTools": "/tools/*"}]]]
+def get_vals_by_tag(keys, data):
+    def make_record_to_result(value, obj):
+        if cache.get(value) is None:
+            result.append([value, [obj]])
+            cache.update({value: len(result) - 1})
+        else:
+            result[cache.get(value)][1].append(obj)
+
+    def get_val(k, d):
+        if not isinstance(d, dict) and not isinstance(d, list):
+            return
+
+        if isinstance(d, dict) or isinstance(d, list):
+            if k in d:
+                make_record_to_result(k, d[k])
+                return
+
+        for val in d.values() if isinstance(d, dict) else d:
+            get_val(k, val)
+
+    for key in keys:
+        get_val(key, data)
+
+    return result
+
+assert get_vals_by_tag(['servlet-mapping', 'aa'], json_data) == [['servlet-mapping', [{
+    "cofaxCDS": "/",
+    "cofaxEmail": "/cofaxutil/aemail/*",
+    "cofaxAdmin": "/admin/*",
+    "fileServlet": "/static/*",
+    "cofaxTools": "/tools/*"}]]]
