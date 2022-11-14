@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  pg_learn:
+    image: postgres:9.6
+    container_name: pg_learn
+    hostname: pg_learn
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "7432:5432"
+    expose:
+      - 7432
+    environment:
+      POSTGRES_USER: 'pglearn'
+      POSTGRES_PASSWORD: 'pglearn'
+      POSTGRES_DB: 'pglearn'
