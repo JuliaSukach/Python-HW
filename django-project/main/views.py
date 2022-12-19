@@ -1,18 +1,36 @@
 from datetime import datetime
 
-from django.shortcuts import render
+from django.http import HttpResponse
+
+from .models import User
+from .models import Post
+from django.shortcuts import render, redirect
+from django.template import loader
+from .utils import get_user
+from .utils import paginate
+from .forms import PostForm
 
 
 def main(request):
-    now = datetime.now()
+    user_profile = User.objects.first()
+    comments = Post.objects.all()
+    form = PostForm(request.POST or None)
+    if request.method == "POST":
+        form = PostForm(request.POST or None)
+        print(form.is_valid())
+        if form.is_valid():
+            print("it's valid!!")
+            post = form.save(commit=False)
+            post.username = request.user
+            post.save()
+            return redirect("main:profile")
+    context = {
+        'user_profile': user_profile,
+        'comments': comments,
+        "form": form
+    }
 
-    return render(
-        request,
-        "index.html",
-        {
-            'content': "Hello Django" + now.strftime("%A, %d %B, %Y at %X")
-        }
-    )
+    return render(request, "profile.html", context)
 
 
 def about(request):
