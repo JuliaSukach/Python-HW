@@ -1,0 +1,19 @@
+// Variable overrides first
+$primary: #0072BF;
+$dark: #00548F;
+$white: #FFFFFF;
+
+$nav-pills-link-active-bg: $dark;
+$nav-pills-border-radius: 0rem;
+$nav-link-hover-color: $white;
+$nav-link-color: $white;
+
+
+// Then import Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+
+
+
+
+

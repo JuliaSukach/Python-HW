@@ -1,0 +1,11 @@
+$dark: #00548F;
+
+.nav-link {
+    &:hover {
+        background-color: $dark;
+    }
+}
+
+.card {
+    border: none;
+}
