@@ -23,14 +23,49 @@ def main(request):
             post = form.save(commit=False)
             post.username = request.user
             post.save()
-            return redirect("main:profile")
+            return redirect("main:home")
     context = {
         'user_profile': user_profile,
         'comments': comments,
-        "form": form
+        "form": form,
+        'navbar': 'home',
+        'tabs': ['Home', 'Goals', 'Check-In', 'Mail', 'Profile', 'Friends', 'Settings']
     }
 
-    return render(request, "profile.html", context)
+    return render(request, "home.html", context)
+
+
+def food(request):
+    return render(
+        request,
+        "food.html",
+        {
+            'navbar': 'food',
+            'tabs': ['Food Diary', 'Database', 'My Foods', 'My Meals', 'Recipes', 'Settings']
+         }
+    )
+
+
+def exercise(request):
+    return render(
+        request,
+        "exercise.html",
+        {
+            'navbar': 'exercise',
+            'tabs': ['Exercise Diary', 'Database', 'My Exercises', 'Settings']
+        }
+    )
+
+
+def reports(request):
+    return render(
+        request,
+        "reports.html",
+        {
+            'navbar': 'reports',
+            'tabs': ['home', 'goals', 'check-in', 'mail']
+        }
+    )
 
 
 def about(request):

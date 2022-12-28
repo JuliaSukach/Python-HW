@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block tabs %}
+    {% if tabs %}
+        {% for tab in tabs %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'main:home' %}">{{ tab }}</a>
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endblock tabs %}
+
+{% block content %}
+    <h1 class="container text-info" id="reports">Reports</h1>
+{% endblock content %}

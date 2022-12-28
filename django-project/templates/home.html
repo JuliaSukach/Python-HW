@@ -1,13 +1,25 @@
 {% extends 'index.html' %}
 
-{% block content %}
-    {% if user_profile %}
-{#        <div>{{ user_profile.goal_weight }}</div>#}
-{#        <div>{{ user_profile.last_name }}</div>#}
-        <div>{{ user_profile.username }}</div>
-    {% else %}
-    <p>User is not found</p>
+{% block tabs %}
+    {% if tabs %}
+        {% for tab in tabs %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'main:home' %}">{{ tab }}</a>
+            </li>
+        {% endfor %}
     {% endif %}
+{% endblock tabs %}
+
+{% block content %}
+    <div>
+        {% if user_profile %}
+            {#        <div>{{ user_profile.goal_weight }}</div>#}
+            {#        <div>{{ user_profile.last_name }}</div>#}
+            <div>{{ user_profile.username }}</div>
+        {% else %}
+        <p>User is not found</p>
+        {% endif %}
+    </div>
 {% endblock content %}
 
 {% block profile %}
