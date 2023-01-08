@@ -52,27 +52,10 @@
             </header>
             {% block content %}
             {% endblock %}
-            <div class="card w-75 ps-5">
-              <div class="border border-left border-right px-0">
-                <div class="ps-3 pt-2 pb-2 border-bottom bg-dark">
-                  <h6 class="d-flex align-items-center mb-0 text-white">
-                    News Feed  <i class="far fa-xs fa-star ms-auto text-primary"></i>
-                  </h6>
-                </div>
-                <div>
-                  <div class="card shadow-0">
-                    <div class="card-body border-bottom pb-2">
-                        {% block profile %}
-                        {% endblock %}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card w-75 ps-5 mt-2">
-                {% block notes %}
-                {% endblock %}
-            </div>
+            {% block profile %}
+            {% endblock %}
+            {% block notes %}
+            {% endblock %}
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
                 integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

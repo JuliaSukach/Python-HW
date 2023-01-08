@@ -11,5 +11,22 @@
 {% endblock tabs %}
 
 {% block content %}
-    <h1 class="container text-info" id="food">Food</h1>
+    <div class="wrap m-auto mt-4 position-relative text-start d-inline-block overflow-hidden">
+        <div class="content float-start d-inline position-relative w-100">
+            <div class="main float-start">
+                <div class="diary d-flex border-bottom border-secondary border-3">
+                    <h1>Your Food Diary For:</h1>
+                    <div class="date-controls m-auto ms-3">
+                        <div class="">
+                            <input class="form-control" type="date" />
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 {% endblock content %}

@@ -6,4 +6,16 @@
   border: none;
 }
 
+.wrap {
+  width: 940px;
+}
+.wrap .content {
+  padding: 20px 0 4em;
+  clear: both;
+}
+.wrap .content .main {
+  display: contents;
+  width: 750px;
+}
+
 /*# sourceMappingURL=custom.css.map */

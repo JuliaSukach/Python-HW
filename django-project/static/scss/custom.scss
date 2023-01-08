@@ -9,3 +9,15 @@ $dark: #00548F;
 .card {
     border: none;
 }
+
+.wrap {
+    width: 940px;
+    .content {
+        padding: 20px 0 4em;
+        clear: both;
+        .main {
+            display: contents;
+            width: 750px;
+        }
+    }
+}
