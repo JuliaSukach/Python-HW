@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os.path
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -22,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-sbed+g%4)#*3s1q%k!f@!9+ko2@tliuy-1xp)nl0rp@i^cn#)+'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
@@ -39,9 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_node_assets',
+    'djoser',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'authentication',
+    'main',
     # 'django_countries',
-    'bootstrap',
-    'main'
+    'bootstrap'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +77,26 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+# JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=6),
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=6),
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': timedelta(hours=1),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7)
+}
+
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
@@ -86,11 +111,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PWD'),
         'CON_MAX_AGE': os.getenv('CON_MAX_AGE'),
-    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    },
 }
 
 # Password validation
